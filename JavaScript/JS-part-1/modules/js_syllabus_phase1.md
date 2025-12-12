@@ -457,4 +457,475 @@
             ans: false <br>
             reason: undefined is falsy, so !!undefined = false
 
--   🎯 Usage:
+-   🎯 Usage: - Understanding data types is crucial for effective programming, debugging, and avoiding type-related errors in JavaScript.
+
+        - API validation, form handling, state checks, and conditional rendering all rely on proper type handling.
+
+    <hr/>
+
+## 🔄️3. Operators
+
+-   ✅ Teach
+
+    -   Arithmetic, comparison, logical, assignment, unary, ternary
+
+    ```javascript
+    // Arithmetic Operators
+    let a = 10;
+    let b = 3;
+    console.log(a + b); // Addition: 13
+    console.log(a - b); // Subtraction: 7
+    console.log(a * b); // Multiplication: 30
+    console.log(a / b); // Division: 3.3333...
+    console.log(a % b); // Modulus: 1
+    console.log(a ** b); // Exponentiation: 1000
+
+    // Comparison Operators
+    console.log(a == b); // Equal to: false
+    console.log(a === b); // Strict equal to: false
+    console.log(a != b); // Not equal to: true
+    console.log(a !== b); // Strict not equal to: true
+    console.log(a > b); // Greater than: true
+    console.log(a < b); // Less than: false
+    console.log(a >= b); // Greater than or equal to: true
+    console.log(a <= b); // Less than or equal to: false
+
+    // Logical Operators
+    console.log(a > 5 && b < 5); // Logical AND: true
+    console.log(a > 5 || b > 5); // Logical OR: true
+    console.log(!(a > 5)); // Logical NOT: false
+
+    // Assignment Operators
+    let c = 5;
+    c += 2; // c = c + 2
+    console.log(c); // 7
+    c -= 3; // c = c - 3
+    console.log(c); // 4
+    c *= 2; // c = c * 2
+    console.log(c); // 8
+    c /= 4; // c = c / 4
+    console.log(c); // 2
+    c %= 2; // c = c % 2
+    console.log(c); // 0
+    c **= 3; // c = c ** 3
+    console.log(c); // 0
+
+    // Unary Operators
+    let d = 5;
+    console.log(+d); // Unary plus: 5
+    console.log(-d); // Unary minus: -5
+    console.log(typeof d); // Typeof: "number"
+    console.log(++d); // Pre-increment: 6
+    console.log(d++); // Post-increment: 6 (then d becomes 7)
+    console.log(--d); // Pre-decrement: 6
+    console.log(d--); // Post-decrement: 6 (then d becomes 5)
+
+    // Ternary Operator
+    let age = 20;
+    let canVote = age >= 18 ? "Yes" : "No";
+    console.log(canVote); // "Yes"
+    ```
+
+    -   typeof, instanceof
+
+    ```javascript
+    // typeof operator
+    console.log(typeof "Hello"); // "string"
+    console.log(typeof 42); // "number"
+    console.log(typeof true); // "boolean"
+    console.log(typeof undefined); // "undefined"
+    console.log(typeof null); // "object" (quirk)
+    console.log(typeof Symbol("sym")); // "symbol"
+    console.log(typeof 9007199254741991n); // "bigint"
+    console.log(typeof [1, 2, 3]); // "object" (arrays are objects)
+    console.log(typeof { name: "Sagar" }); // "object"
+    console.log(typeof function () {}); // "function"
+    // instanceof operator
+    let arr = [1, 2, 3];
+    console.log(arr instanceof Array); // true
+    console.log(arr instanceof Object); // true
+    let obj = { name: "Sagar" };
+    console.log(obj instanceof Object); // true
+    function Person(name) {
+        this.name = name;
+    }
+    let person = new Person("Sagar");
+    console.log(person instanceof Person); // true
+    console.log(person instanceof Object); // true
+    ```
+
+-   ⚠️ Common Confusion:
+
+    -   !!value for truthiness
+        Ans: The double negation operator (!!) converts a value to its boolean equivalent, effectively checking its truthiness. The first ! negates the value, and the second ! negates it again, resulting in true for truthy values and false for falsy values.
+
+    -   Pre/post increment/decrement
+        Ans: Pre-increment/decrement operators (++var/--var) modify the variable's value before it is used in an expression, while post-increment/decrement operators (var++/var--) modify the variable's value after it is used in an expression.
+
+-   🧪 Practice: - Logic condition quizzes - Scoring logic with ternary
+<hr/>
+
+## ⏱️4. Control Flow
+
+-   ✅ Teach:
+
+    -   if, else if, switch-case, early ruturn pattern
+
+    Example 1 -> of if-else-if:
+
+    ```javascript
+    // if-else-if example
+    if (loggedIn && admin) {
+    } else if (loggedIn && !admin) {
+    } else {
+    }
+    ```
+
+    Example 2:
+
+    ```javascript
+    // if-else else-if example
+    let score = 85;
+    if (score >= 90) {
+        console.log("Grade: A");
+    } else if (score >= 80) {
+        console.log("Grade: B");
+    } else if (score >= 70) {
+        console.log("Grade: C");
+    } else {
+        console.log("Grade: F");
+    }
+    ```
+
+    Example 3 -> of switch-case:
+
+    ```javascript
+    // switch-case example
+    let day = 3;
+    switch (day) {
+        case 1:
+            console.log("Monday");
+            break;
+        case 2:
+            console.log("Tuesday");
+            break;
+        case 3:
+            console.log("Wednesday");
+            break;
+        case 4:
+            console.log("Thursday");
+            break;
+        case 5:
+            console.log("Friday");
+            break;
+        default:
+            console.log("Invalid day");
+    }
+    ```
+
+    Example 4 -> of early return pattern:
+
+    ```javascript
+    function getVal(val) {
+        if (val < 100) return "A";
+        else if (val < 75) return "B";
+        else if (val < 50) return "C";
+        else return "D";
+    }
+
+    getVal(12);
+
+    // The issue here is even if value if less than 50, it will never reach that condition because of the order of checks.
+
+    // Corrected version:
+    function getVal(val) {
+        if (val < 25) return "D";
+        else if (val < 50) return "C";
+        else if (val < 75) return "B";
+        else return "A";
+    }
+
+    getVal(12);
+    ```
+
+-   ⚠️ Confusion:
+    -   Fallthrough in switch-case
+    -
+-   🧪 Practice: - Student grade categorizer
+
+    ```javascript
+    function getGrade(score) {
+        if (score < 0 || score > 100) {
+            return "Invalid score";
+        }
+
+        if (score >= 90) return "A+";
+        else if (score >= 80) return "A";
+        else if (score >= 70) return "B";
+        else if (score >= 60) return "C";
+        else if (score >= 33) return "D";
+        else return "F";
+    }
+
+    console.log(getGrade(85)); // Output: A
+    console.log(getGrade(150)); // Output: Invalid score
+    console.log(getGrade(45)); // Output: D
+    console.log(getGrade(-10)); // Output: Invalid score
+    console.log(getGrade(25)); // Output: F
+    console.log(getGrade(95)); // Output: A+
+    console.log(getGrade(70)); // Output: B
+    console.log(getGrade(60)); // Output: C
+    console.log(getGrade(33)); // Output: D
+    ```
+
+    -   Rock-paper-scissors game logic
+
+    ```javascript
+    // Rock-paper-scissors game logic
+
+    function RockPaperScissors(user, computer) {
+        if (user === "rock" && computer === "scissors")
+            return "User wins!" + " (rock beats scissors)";
+        if (user === "sissors" && computer === "paper")
+            return "User wins!" + " (scissors beats paper)";
+        if (user === "paper" && computer === "rock")
+            return "User wins!" + " (paper beats rock)";
+        if (user === computer) return "It's a tie!";
+        return "Computer wins!";
+    }
+
+    RockPaperScissors("rock", "scissors");
+    RockPaperScissors("paper", "rock");
+    RockPaperScissors("scissors", "rock");
+    RockPaperScissors("paper", "paper");
+    ```
+
+-   🎯 Usage: - Control flow is essential for decision-making in code, allowing developers to execute different code paths based on conditions. It is widely used in form validation, user authentication, game logic, and more.
+<hr/>
+
+## 🔄️5.Loops
+
+Kuch bhi repeated karne ke liye loops ka use hota hain.
+
+```javascript
+// repeat karne ko loop kahte hain
+// 1 1 1 1 1 1 1 1 1
+// 1 2 3 4 5 6 7 8 9
+
+// kaha se jaana hain -> kaha tak jaana hain -> kaise jaana hain
+// for loop
+
+// kaha se jaana hain -> kab rukna hain -> kaise jaana hain
+// while loop
+```
+
+-   ✅ Teach:
+
+    -   for, while, do-while
+
+    ```javascript
+    // for loop example
+    for (let i = 1; i <= 9; i++) {
+        console.log(i);
+    }
+
+    // while loop example
+    let j = 1;
+    while (j <= 9) {
+        console.log(j);
+        j++;
+    }
+
+    // do-while loop example
+    let k = 1;
+    do {
+        console.log(k);
+        k++;
+    } while (k <= 9);
+    ```
+
+    -   break, continue
+
+    ```javascript
+    // break example
+    for (let i = 1; i <= 10; i++) {
+        if (i === 5) {
+            break; // Exit the loop when i is 5
+        }
+        console.log(i);
+    }
+
+    // continue example
+    for (let i = 1; i <= 10; i++) {
+        if (i % 2 === 0) {
+            continue; // Skip even numbers
+        }
+        console.log(i); // This will print only odd numbers
+    }
+    ```
+
+    -   for-of, forEach for arrays
+    -   for-in, Object.entries for objects
+
+-   ⚠️ Confusion:
+
+    -   for-in vs for-of
+
+-   🧠 Mindset:
+
+    -   Loop if for processing data
+
+-   🧪 Practice:
+
+    -   Print pattern questions
+
+    ```javascript
+    // Q1. Print numbers from 1 to 10 using for loop
+    for (let i = 1; i <= 10; i++)  {
+
+        console.log(i);
+    }
+
+    // Q2. Print number 10 to 1 using while loop
+    for (let i = 10; i >= 1; i--) {
+        console.log(i);
+    }
+
+    let i = 10;
+
+    while (i >= 1) {
+        console.log(i);
+        i--;
+    }
+
+    // Q3. Print even numbers from 1 to 20 using a for loop.
+    for (let i = 1; i <= 20; i++) {
+        if (i % 2 === 0) {
+            console.log(i);
+        }
+    }
+
+    // Q4. Print odd numbers from 1 to 15 using a while loop.
+    let k = 1;
+
+    while (k <= 15) {
+        if (k % 2 !== 0) {
+            console.log(k);
+        }
+        k++;
+    }
+
+    // Q5. Print the multiplication table of 5 using a for loop. (i.e., 5 x 1 = 5)
+    for (let i = 1; i <= 10; i++) {
+        console.log(`5 x ${i} = ${5 * i}`);
+    }
+
+    // Q6. Find the sum of numbers from 1 to 100 using a loop.
+    let sum = 0;
+    for (let i = 1, i <= 100; i++) {
+        sum += i;
+    }
+    console.log("Sum from 1 to 100 is:", sum);
+
+    // Q7. Print all numbers between 1 to 50 that are divisible by 3.
+    for (let i = 1; i <= 50; i++) {
+        if (i % 3 === 0) {
+            console.log(i);
+        }
+    }
+
+    // Q8. Ask the user for a number and print whether each number from 1 to that number is even or odd.
+    // (e.g., "1 is odd", "2 is even", etc.)
+
+    let userNum = parseInt(prompt("Enter a number: "));
+
+    for (let i = 1; i <= userNum; i++) {
+        if (i % 2 === 0) {
+            console.log(`${i} is even`);
+        } else {
+            console.log(`${i} is odd`);
+        }
+    }
+
+    // Q9. Count how many numbers between 1 to 100 are divisible by both 3 and 5.
+
+    let count = 0;
+
+    for (let i = 1; i <= 100; i++) {
+        if (i % 3 === 0 && i % 5 === 0) {
+            console.log(i);
+            count++;
+        }
+    }
+
+    console.log("Count of numbers divisible by both 3 and 5 between 1 to 100 is:", count);
+
+    // Q10. Stop at First Multiple of 7
+
+    // Write a loop from 1 to 100 that:
+    // - Prints each number.
+    // - Stops completely when it finds numebr divisible by 7.
+
+    for (let i = 1; i <= 100; i++) {
+        console.log(i);
+
+        if (i % 7 === 0) {
+            break;
+        }
+    }
+
+    // Q11. Skip Multiples of 3
+
+    // Write a loop from 1 to 20 that:
+    // - Skips numbers divisible by 3.
+    // - Prints all other numbers.
+
+    // Use continue
+
+    // Expected Output: 1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20
+
+    for (let i = 1; i <= 20; i++) {
+        if (i % 3 === 0) continue;
+
+        console.log(i);
+    }
+
+    // Q12. Print First 5 Odd Numbers Only
+
+    // While a loop from 1 to 100 that:
+    // - Prints only the first 5 odd numbers it encounters.
+    // - Then stops the loop.
+
+    // Use both if, break, and a continue + break
+
+    // Expected Output: 1, 3, 5, 7, 9
+
+
+    // if, break
+    for (let i = 1; i <= 100; i++) {
+        let count = 0;
+
+        if (i % 2 === 1) {
+            count++;
+            console.log(i);
+        }
+
+        if (count === 5) break;
+    }
+
+    // continue + break
+    for (let i = 1, count = 0; i <= 100; i++) {
+        if (i % 2 === 0) continue;
+
+        console.log(i);
+
+        count++;
+
+        if (count === 5) break;
+    }
+
+
+    ```
+
+    -   Reverse a string using loop
+    -   Sum of even/odd numbers from array
