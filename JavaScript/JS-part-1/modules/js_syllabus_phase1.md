@@ -929,3 +929,490 @@ Kuch bhi repeated karne ke liye loops ka use hota hain.
 
     -   Reverse a string using loop
     -   Sum of even/odd numbers from array
+
+## 🪤6. Functions
+
+-   ✅Teach:
+
+    -   **Function declaration, expressions, and arrow functions**
+
+    ```javascript
+    // Function Declaration
+    function greet(name) {
+        return `Hello, ${name}`;
+    }
+
+    greet("Sagar"); // "Hello, Sagar"
+
+    // Function Expression
+    const greet = function (name) {
+        return `Hello, ${name}`;
+    };
+
+    greet("Sagar"); // "Hello, Sagar"
+
+    // Arrow Function
+    const greet = (name) => {
+        return `Hello, ${name}`;
+    };
+
+    greet("Sagar"); // "Hello, Sagar"
+    ```
+
+    -   **Parameters vs Arguments**
+
+    ```javascript
+    // Parameters are the names listed in the function definition
+    function add(a, b) {
+        // a and b are parameters
+        return a + b;
+    }
+
+    // Arguments are the real values passed to the function
+    add(5, 10); // 5 and 10 are arguments
+    ```
+
+    -   **Default, rest, and spread parameters**
+
+    ```javascript
+    // Default Parameters
+    function greet(name = "Guest") {
+        // name is a parameter with a default value
+        return `Hello, ${name}`;
+    }
+
+    greet(); // "Hello, Guest" (no argument passed, uses default)
+    greet("Sagar"); // "Hello, Sagar" (argument passed)
+
+    // Rest Parameters
+    function sum(...numbers) {
+        // numbers is a rest parameter
+        return numbers.reduce((total, num) => total + num, 0);
+    }
+    sum(1, 2, 3, 4); // 10 (arguments passed as an array)
+
+    // Spread Operator
+    const arr1 = [1, 2, 3];
+    const arr2 = [...arr1, 4, 5]; // arr2 is [1, 2, 3, 4, 5]
+    ```
+
+    -   **Return values and early returns**
+
+    ```javascript
+    function isEven(num) {
+        if (num % 2 === 0) {
+            return true; // early return if condition met
+        }
+        return false; // return false otherwise
+    }
+    isEven(4); // true
+    isEven(5); // false
+    ```
+
+    -   **First-class functions (assign to variables, pass as arguments, return from other functions)**
+
+    ```javascript
+    // Assigning function to a variable
+    const greet = function (name) {
+        return `Hello, ${name}`;
+    };
+
+    // Passing function as an argument
+    function processUserInput(callback) {
+        const name = "Sagar";
+        console.log(callback(name));
+    }
+
+    // Returning function from another function
+    function createGreeting(greeting) {
+        return function (name) {
+            return `${greeting}, ${name}`;
+        };
+    }
+    const sayHello = createGreeting("Hello");
+    sayHello("Sagar"); // "Hello, Sagar"
+    ```
+
+    -   **Higher-order functions**
+
+    ```javascript
+    // Function that returns a function
+    function multiplier(factor) {
+        return function (number) {
+            return number * factor;
+        };
+    }
+    const double = multiplier(2);
+    double(5); // 10
+    multiplier(3)(4); // 12
+
+    // Higher-order function that takes a function as an argument
+    function mapArray(arr, callback) {
+        const result = [];
+        for (let i = 0; i < arr.length; i++) {
+            result.push(callback(arr[i]));
+        }
+        return result;
+    }
+
+    const numbers = [1, 2, 3, 4];
+    const doubled = mapArray(numbers, function (num) {
+        return num * 2;
+    }); // [2, 4, 6, 8]
+    ```
+
+    -   Pure vs impure functions
+
+    ```javascript
+    // Pure Function
+    function add(a, b) {
+        return a + b; // always returns the same output for the same inputs
+    }
+    add(2, 3); // 5
+
+    // Impure Function
+    let counter = 0;
+    function increment() {
+        counter++; // modifies external state
+        return counter;
+    }
+    increment(); // 1
+    increment(); // 2
+    ```
+
+    -   **Closures and lexical scoping**
+
+        -   **Closure:** Ek function jo return kare ek aur function ko, aur return hone wala function humesha use karega parent function ka koi variable.
+
+        ```javascript
+        function abcd() {
+            let a = 12;
+            return function () {
+                console.log(a);
+            };
+        }
+        ```
+
+        -   **Lexical Scoping:** Jab ek function apne parent function ke variables ko access kar sakta hain, chahe wo parent function ka scope khatam ho chuka ho.
+
+        ```javascript
+        function outer() {
+            let outerVar = "I'm from outer function";
+
+            function inner() {
+                console.log(outerVar); // Accessing outer function's variable
+            }
+
+            return inner;
+        }
+        const innerFunction = outer();
+        innerFunction(); // Output: "I'm from outer function"
+        ```
+
+    -   **IIFE (Immediately Invoked Function Expressions)**
+
+    ```javascript
+    (function () {
+        console.log("This function runs immediately upon definition!");
+    })();
+    ```
+
+    -   **Hoisting differences between declaration and expression**
+
+    ```javascript
+    // Function Declaration Hoisting
+    greet("Sagar"); // Works because of hoisting
+    function greet(name) {
+        return `Hello, ${name}`;
+    }
+
+    // Function Expression Hoisting
+    greet("Sagar"); // Error: greet is not a function
+    const greet = function (name) {
+        return `Hello, ${name}`;
+    };
+    ```
+
+-   ⚠️ **Common Confusion:**
+
+    -   Arrow vs regular function: `this` context
+        **Answer:** Arrow functions do not have their own `this` context; they inherit `this` from the surrounding lexical scope. Regular functions have their own `this` context, which is determined by how the function is called.
+
+        ```javascript
+        const obj = {
+            name: "Sagar",
+            regularFunction: function () {
+                console.log(this.name); // "Sagar"
+            },
+            arrowFunction: () => {
+                console.log(this.name); // undefined (or global context)
+            },
+        };
+
+        obj.regularFunction();
+        obj.arrowFunction();
+        ```
+
+    -   Function hoisting and TDZ
+        **Answer:** Function declarations are hoisted, meaning they can be called before they are defined in the code. Function expressions, however, are not hoisted in the same way; if they are defined using `let` or `const`, they are subject to the Temporal Dead Zone (TDZ) and cannot be accessed before their declaration.
+
+        ```javascript
+        // Function Declaration Hoisting
+        greet("Sagar"); // Works because of hoisting
+        function greet(name) {
+            return `Hello, ${name}`;
+        }
+
+        // Function Expression Hoisting
+        greet("Sagar"); // Error: greet is not a function
+        const greet = function (name) {
+            return `Hello, ${name}`;
+        };
+        ```
+
+    -   Scope chains and closure traps
+        **Answer:** A scope chain is the hierarchy of scopes that JavaScript uses to resolve variable references. Closures can sometimes lead to traps where inner functions capture variables from their outer scope, which may lead to unexpected behavior if those variables change after the closure is created.
+
+        ```javascript
+        function createCounter() {
+            let count = 0;
+            return function () {
+                count++;
+                return count;
+            };
+        }
+
+        const counter1 = createCounter();
+        console.log(counter1()); // 1
+        console.log(counter1()); // 2
+
+        const counter2 = createCounter();
+        console.log(counter2()); // 1 (new closure with its own count)
+        ```
+
+-   🧠 **Mindset:**
+
+    -   Functions = logic blocks + memory holders (closures)
+
+-   🧪 **Practice:**
+
+    -   **Q1.** What's the difference between function declarations and expressions in terms of hoisting?
+
+        **Answer**: Function declarations are hoisted, meaning they can be called before they are defined in the code. Function expressions, on the other hand, are not hoisted; they can only be called after they have been assigned.
+
+    -   **Q2.** What will be the output of the following code snippet ?
+
+        ```javascript
+        greet();
+
+        function greet() {
+            console.log("Hello!");
+        }
+        ```
+
+        **Answer**: The output will be "Hello!" because function declarations are hoisted, allowing the greet function to be called before its definition.
+
+    -   **Q3.** Change this function into an arrow function:
+
+        ```javascript
+        function multiply(a, b) {
+            return a * b;
+        }
+        ```
+
+        **Answer**:
+
+        ```javascript
+        const multiply = (a, b) => a * b;
+        ```
+
+        OR
+
+        ```javascript
+        const multiply = (a, b) => {
+            return a * b;
+        };
+        ```
+
+    -   **Q4.** Identify parameters and arguments in the following function:
+
+        ```javascript
+        function welcome(name) {
+            console.log(`Welcome, ${name}!`);
+        }
+
+        welcome("Sagar");
+        ```
+
+        **Answer**: In the function definition, "name" is the parameter. When calling the function with "Sagar", "Sagar" is the argument.
+
+    -   **Q5.** How many paramerters does this function have and how many arguments are passed when calling it?
+
+        ```javascript
+        function sum(a, b, c) {
+            return a + b + c;
+        }
+
+        sum(1, 2);
+        ```
+
+        **Answer**: The function has 3 parameters (a, b, c), but only 2 arguments (1, 2) are passed when calling it. The third parameter "c" will be undefined.
+
+    -   **Q6.** Guess the output of the following code:
+
+        ```javascript
+        function sayHi(name = "Guest") {
+            return `Hi, ${name}!`;
+        }
+
+        sayHi();
+        ```
+
+        **Answer**: The output will be "Hi, Guest!" because the default parameter value "Guest" is used when no argument is provided.
+
+    -   **Q7.** What does the ... (three dots)
+        operator means in function parameters?
+
+        **Answer**: The ... operator is called the rest parameter syntax. It allows a function to accept an indefinite number of arguments as an array.
+
+    -   **Q8.** Use rest parameter to accept any number of scores and return the total.
+
+        ```javascript
+        function totalScores(...scores) {
+            let total = 0;
+            return scores.forEach(function (val) {
+                total += val;
+            });
+            return total;
+        }
+
+        totalScores(10, 20, 30); // 60
+        ```
+
+    -   **Q9.** Fix this function using early return pattern:
+
+        ```javascript
+        function checkAge(age) {
+            if (age < 18) {
+                console.log("Too young");
+            } else {
+                console.log("Allowed");
+            }
+        }
+
+        checkAge(16); // "Too young"
+        checkAge(20); // "Allowed"
+        ```
+
+        **Answer**:
+
+        ```javascript
+        function checkAge(age) {
+            if (age < 18) return "Too young";
+
+            return "Allowed";
+        }
+
+        console.log(checkAge(16)); // "Too young"
+        console.log(checkAge(20)); // "Allowed"
+        ```
+
+    -   **Q10.** What will this function return when called?
+
+        ```javascript
+        function f() {
+            return;
+        }
+
+        f();
+        ```
+
+        **Answer**: The function will return `undefined` because there is no value specified after the return statement.
+
+    -   **Q11.** What does it mean when we say "function are first-class citizens" in JavaScript?
+
+        **Answer**: It means that functions in JavaScript can be treated like any other variable. They can be assigned to variables, passed as arguments to other functions, and returned from other functions.
+
+    -   **Q12.** Can yo assign a function to a variable and then call it? Show how.
+
+        **Answer**:
+
+        ```javascript
+        const greet = function (name) {
+            return `Hello, ${name}`;
+        };
+
+        console.log(greet("Sagar")); // "Hello, Sagar"
+        ```
+
+    -   **Q13.** Pass a function into another function as an argument and execute it inside.
+
+        **Answer**:
+
+        ```javascript
+        function abcd(func) {
+            func();
+        }
+
+        abcd(function () {
+            console.log("Function passed as argument executed!");
+        });
+        ```
+
+    -   Write a BMI calculator
+
+    ```javascript
+    function bmiCalculator(weight, height) {
+        return weight / (height * height);
+    }
+    bmiCalculator(70, 1.75); // 22.86
+    ```
+
+    -   Create a reusable discount calculator (HOF)
+
+    ```javascript
+    function discountCalculator(discount) {
+        return function (price) {
+            return price - price * (discount / 100);
+        };
+    }
+    const tenPercentDiscount = discountCalculator(10);
+    tenPercentDiscount(200); // 180
+    discountCalculator(20)(200); // 160
+    ```
+
+    -   Build a counter using closure
+
+    ```javascript
+    function createCounter() {
+        let count = 0;
+        return function () {
+            count++;
+            return count;
+        };
+    }
+    const counter = createCounter();
+    counter(); // 1
+    counter(); // 2
+    ```
+
+    -   Create a pure function to transform a value
+
+    ```javascript
+    function toUpperCase(str) {
+        return str.toUpperCase();
+    }
+    toUpperCase("hello"); // "HELLO"
+    ```
+
+    -   Use IIFE to isolate variables
+
+    ```javascript
+    (function () {
+        let secret = "This is a secret";
+        console.log(secret);
+    })();
+    ```
+
+-   🎯 Usage:
+    -   Reusablity, event handlers, API logic, array operations

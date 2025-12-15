@@ -1,9 +1,9 @@
-for (let i = 1, count = 0; i <= 100; i++) {
-    if (i % 2 === 0) continue;
-
-    console.log(i);
-
-    count++;
-
-    if (count === 5) break;
+// Returning function from another function
+function createGreeting(greeting) {
+    return function (name) {
+        return `${greeting}, ${name}`;
+    };
 }
+const sayHello = createGreeting("Hello");
+sayHello("Sagar"); // "Hello, Sagar"
+console.log(sayHello("Sagar")); // "Hello, Sagar"
