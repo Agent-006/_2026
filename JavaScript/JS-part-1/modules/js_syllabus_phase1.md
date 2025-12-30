@@ -1416,3 +1416,655 @@ Kuch bhi repeated karne ke liye loops ka use hota hain.
 
 -   🎯 Usage:
     -   Reusablity, event handlers, API logic, array operations
+
+<hr/>
+
+## 🧮7. Arrays
+
+-   ✅ **Teach:**
+
+    -   Create, access, modify arrays
+
+    ```javascript
+    // Creating an array
+    let arr = [1, 2, 3, 4, 5];
+    // OR
+    let arr = new Array(1, 2, 3, 4, 5);
+
+    // Accessing elements
+    console.log(arr[0]); // 1
+    console.log(arr[2]); // 3
+    console.log(arr[arr.length - 1]); // 5 (last element)
+    ```
+
+    -   Array methods: `push`, `pop`, `shift`, `unshift`, `splice`, `slice`, `reverse`, `sort`
+
+    Methods: Methods are built-in functions that perform specific operations on arrays.
+
+    ```javascript
+    let arr = [3, 1, 4, 2];
+    // push - adds an element to the end
+    arr.push(5); // arr is now [3, 1, 4, 2, 5]
+    // pop - removes the last element
+    arr.pop(); // arr is now [3, 1, 4, 2]
+    // shift - removes the first element
+    arr.shift(); // arr is now [1, 4, 2]
+    // unshift - adds an element to the beginning
+    arr.unshift(0); // arr is now [0, 1, 4, 2]
+    // splice - removes/replace elements at a specific index
+    arr.splice(1, 2, 5, 6); // arr is now [0, 5, 6, 2]
+    // slice - creates a new array from a portion of the original array
+    let newArr = arr.slice(1, 3); // newArr is [5, 6], arr remains [0, 5, 6, 2]
+    // reverse - reverses the array in place
+    arr.reverse(); // arr is now [2, 6, 5, 0]
+    // sort - sorts the array (default is lexicographical order)
+    arr.sort((a, b) => a - b); // arr is now [0, 2, 5, 6]
+    // OR
+    arr.sort((a, b) => {
+        return a - b;
+    });
+    ```
+
+    -   Iteration methods: `forEach`, `map`, `filter`, `reduce`, `find`, `some`, `every` (intro level)
+
+    ```javascript
+    let numbers = [1, 2, 3, 4, 5];
+    // forEach - executes a function for each array element
+    numbers.forEach((num) => console.log(num)); // prints 1, 2, 3, 4, 5
+
+    // map - creates a new array by applying a function to each element
+    let doubled = numbers.map((num) => num * 2); // doubled is [2, 4, 6, 8, 10]
+
+    // filter - creates a new array with elements that pass a test
+    let evens = numbers.filter((num) => num % 2 === 0); // evens is [2, 4]
+
+    // reduce - reduces the array to a single value by applying a function
+    let sum = numbers.reduce((total, num) => total + num, 0); // sum is 15
+
+    // find - returns the first element that satisfies a condition
+    let firstEven = numbers.find((num) => num % 2 === 0); // firstEven is 2
+
+    // some - checks if at least one element satisfies a condition
+    let hasEven = numbers.some((num) => num % 2 === 0); // hasEven is true
+
+    // every - checks if all elements satisfy a condition
+    let allPositive = numbers.every((num) => num > 0); // allPositive is true
+    ```
+
+    -   Destructuring, spread operator with arrays
+
+    ```javascript
+    let arr = [1, 2, 3, 4, 5];
+    // Destructuring
+    let [first, second, ...rest] = arr; // first is 1,
+    // second is 2, rest is [3, 4, 5]
+
+    // Spread Operator
+    let arr2 = [...arr, 6, 7]; // arr2 is [1, 2, 3, 4, 5, 6, 7]
+    ```
+
+-   🧪 Pricatice:
+
+    -   1️⃣ Create an array with 3 fruits and print the second fruit.
+
+        Code:
+
+        ```javascript
+        let fruits = ["Apple", "Banana", "Cherry"];
+        console.log(fruits[1]); // Output: Banana
+        ```
+
+    -   2️⃣ Add "Mango" at the end and "Pinapple" at the beginning of this array:
+
+        ```javascript
+        let fruits = ["Apple", "Banana"];
+        ```
+
+        Code:
+
+        ```javascript
+        fruits.push("Mango"); // Add Mango at the end
+        fruits.unshift("Pineapple"); // Add Pineapple at the beginning
+        console.log(fruits); // Output: ["Pineapple", "Apple", "Banana", "Cherry", "Mango"]
+        ```
+
+    -   3️⃣ Insert "Red" and "Blue" at index 1 in this array:
+
+        ```javascript
+        let colors = ["Green", "Yellow"];
+        ```
+
+        Code:
+
+        ```javascript
+        colors.splice(1, 0, "Red", "Blue"); // Insert Red and Blue at index 1
+        console.log(colors); // Output: ["Green", "Red", "Blue", "Yellow"]
+        ```
+
+    -   4️⃣ Extract only the middle 3 elements from this array:
+
+        ```javascript
+        let items = [1, 2, 3, 4, 5, 6, 7];
+        ```
+
+        Code:
+
+        ```javascript
+        let middleItems = items.slice(2, 5); // Extract elements from index 2 to 4
+        console.log(middleItems); // Output: [3, 4, 5]
+        ```
+
+    -   5️⃣ Sort this array alphabetically and then reverse it:
+
+        ```javascript
+        let names = ["Zara", "Arjun", "Maya", "Liam"];
+        ```
+
+        Code:
+
+        ```javascript
+        names.sort(); // Sort alphabetically
+        names.reverse(); // Reverse the sorted array
+        console.log(names); // Output: ["Zara", "Maya", "Liam", "Arjun"]
+        ```
+
+    -   6️⃣ Use `.map()` to square each number:
+
+        ```javascript
+        let numbers = [1, 2, 3, 4, 5];
+        ```
+
+        Code:
+
+        ```javascript
+        let squaredNumbers = numbers.map((num) => num * num);
+        console.log(squaredNumbers); // Output: [1, 4, 9, 16, 25]
+        ```
+
+    -   7️⃣ Use `.filter()` to keep numbers greater than 10:
+
+        ```javascript
+        let values = [5, 12, 8, 20, 3, 15];
+        ```
+
+        Code:
+
+        ```javascript
+        let filteredValues = values.filter((num) => num > 10);
+        console.log(filteredValues); // Output: [12, 20, 15]
+        ```
+
+    -   8️⃣ Use `.reduce()` to find the sum of this array:
+
+        ```javascript
+        let arr = [10, 20, 30, 40];
+        ```
+
+        Code:
+
+        ```javascript
+        arr.reduce((total, num) => {
+            return total + num;
+        }, 0);
+        console.log(sum); // Output: 100
+        ```
+
+    -   9️⃣ Use `.find()` to get the first number less than 10:
+
+        ```javascript
+        let nums = [15, 22, 8, 19, 5];
+        ```
+
+        Code:
+
+        ```javascript
+        let firstLessThanTen = nums.find((num) => {
+            return num < 10;
+        });
+        console.log(firstLessThanTen); // Output: 8
+        ```
+
+    -   🔟 Use `.some()` to check if any student has scored below 35:
+
+        ```javascript
+        let scores = [45, 67, 89, 34, 78];
+        ```
+
+        Code:
+
+        ```javascript
+        let hasFailed = scores.some((score) => {
+            return score < 35;
+        });
+        console.log(hasFailed); // Output: true
+        ```
+
+    -   1️⃣1️⃣ Use `.every()` to check if all numbers are even:
+
+        ```javascript
+        let numbers = [2, 4, 6, 8, 10];
+        ```
+
+        Code:
+
+        ```javascript
+        let allEven = numbers.every((num) => {
+            return num % 2 === 0;
+        });
+        console.log(allEven); // Output: true
+        ```
+
+    -   1️⃣2️⃣ Destructure this array to get firstName and lastName:
+
+        ```javascript
+        let fullName = ["Sagar", "Ghosh"];
+        ```
+
+        Code:
+
+        ```javascript
+        let [firstName, lastName] = fullName;
+
+        console.log(firstName); // Output: Sagar
+        console.log(lastName); // Output: Ghosh
+        ```
+
+    -   1️⃣3️⃣ Use spread operator to combine these two arrays:
+
+        ```javascript
+        let arr1 = [1, 2, 3];
+        let arr2 = [4, 5, 6];
+        ```
+
+        Code:
+
+        ```javascript
+        let combinedArr = [...arr1, ...arr2];
+        console.log(combinedArr); // Output: [1, 2, 3, 4, 5, 6]
+        ```
+
+    -   1️⃣4️⃣ Add "India" to the start of this array using spread:
+
+        ```javascript
+        let countires = ["USA", "UK", "Canada"];
+        ```
+
+        Code:
+
+        ```javascript
+        let updatedCountries = ["India", ...countires];
+        console.log(updatedCountries); // Output: ["India", "USA", "UK", "Canada"]
+        ```
+
+-   ⚠️ Common Confusion:
+
+    -   1️⃣ `splice` vs `slice`
+
+        **Answer**: `splice` modifies the original array by adding/removing elements, while `slice` creates a new array by extracting a portion of the original array without modifying it.
+
+    -   `map` vs `forEach`
+
+        **Answer**: `map` returns a new array with the results of applying a function to each element, while `forEach` executes a function for each element but does not return a new array.
+
+    -   `.sort()` behavior without `compareFn`
+
+        **Answer**: Without a `compareFn`, the `sort` method converts elements to strings and sorts them in lexicographical (dictionary) order, which may lead to unexpected results when sorting numbers.
+
+    -   Big blunder with `.sort()`:
+
+    ```javascript
+    let arr = [5, 25, 9, 100, 5, 6];
+    arr.sort();
+    console.log(arr); // Output: [100, 25, 5, 5, 6, 9]
+    ```
+
+    **Answer**: The `.sort()` method without a compare function sorts elements as strings, leading to incorrect numerical order. To sort numbers correctly, provide a compare function:
+
+    ```javascript
+    arr.sort((a, b) => a - b);
+    console.log(arr); // Output: [5, 5, 6, 9, 25, 100]
+    ```
+
+## 🔭8. Objects
+
+-   ✅ Teach:
+
+    -   Key-value structure
+
+    ```javascript
+    let person = {
+        name: "Sagar",
+        age: 25,
+        isStudent: false,
+    };
+    ```
+
+    -   Dot vs bracket notation
+
+    ```javascript
+    // Dot notation
+    console.log(person.name); // "Sagar"
+
+    // Bracket notation
+    console.log(person["age"]); // 25
+    ```
+
+    -   Nesting and deep access
+
+    ```javascript
+    let student = {
+        name: "Maya",
+        address: {
+            street: "123 Main St",
+            city: "Mumbai",
+            country: "India",
+        },
+        grades: [85, 90, 78],
+    };
+    console.log(student.address.city); // "Mumbai"
+    console.log(student.grades[1]); // 90
+    ```
+
+    -   Object destructuring
+
+    ```javascript
+    let person = {
+        name: "Sagar",
+        age: 25,
+        isStudent: false,
+    };
+    let { name, age } = person;
+    console.log(name); // "Sagar"
+    console.log(age); // 25
+    ```
+
+    -   Looping: `for-in`, `Object.keys()`, `Object.entries()`
+
+    ```javascript
+    let person = {
+        name: "Sagar",
+        age: 25,
+        isStudent: false,
+    };
+
+    // for-in loop
+    for (let key in person) {
+        console.log(`${key}: ${person[key]}`);
+    }
+    ```
+
+    ```javascript
+    // Object.keys()
+    Object.keys(person).forEach((key) => {
+        console.log(`${key}: ${person[key]}`);
+    });
+    ```
+
+    ```javascript
+    // Object.entries()
+    Object.entries(person).forEach(([key, value]) => {
+        console.log(`${key}: ${value}`);
+    });
+    ```
+
+    -   Copying objects: spread, `Object.assign()`, deep clone
+
+    ```javascript
+    let original = { a: 1, b: 2 };
+    let copy1 = { ...original }; // Spread operator
+    let copy2 = Object.assign({}, original); // Object.assign()
+    ```
+
+    -   Optional chaining, computed properties
+
+    ```javascript
+    let user = {
+        name: "Sagar",
+        address: {
+            city: "Mumbai",
+        },
+    };
+    console.log(user.address?.city); // "Mumbai"
+    console.log(user.contact?.phone); // undefined
+    ```
+
+    ```javascript
+    let key = "age";
+    let person = {
+        name: "Sagar",
+        [key]: 25, // Computed property
+    };
+    ```
+
+-   ⚠️ Common Confusion:
+
+    -   Reference copy vs deep clone
+
+        **Answer**: Objects are reference types, so when you assign an object to another variable, both variables point to the same object in memory. Changes made through one variable will affect the other. Deep cloning creates a new object with the same properties, so changes to one do not affect the other.
+
+        ```javascript
+        let original = { a: 1, b: { c: 2 } };
+        let referenceCopy = original; // Both point to the same object
+        let deepClone = JSON.parse(JSON.stringify(original)); // Creates a new object
+
+        referenceCopy.b.c = 3;
+        console.log(original.b.c); // 3 (affected)
+        deepClone.b.c = 4;
+        console.log(original.b.c); // 3 (not affected)
+        ```
+
+-   🧠 Mindset:
+
+    -   Objects = structured, readable state
+
+-   🧪 Practice:
+-   -   1️⃣ Create an object for a student with name, age, and isEnrolled.
+
+        ```javascript
+        let student = {
+            name: "Arjun",
+            age: 20,
+            isEnrolled: true,
+        };
+        ```
+
+    -   2️⃣ Can an object key be a number or boolean? Try this.
+
+        ```javascript
+        const obj = {
+            true: "yes",
+            42: "answer",
+        };
+        console.log(obj[42]); // "answer"
+        console.log(obj[true]); // "yes"
+        ```
+
+    -   3️⃣ Access the value of "first-name" from this object:
+
+        ```javascript
+        const user = {
+            "first-name": "Sagar",
+        };
+        ```
+
+        Code:
+
+        ```javascript
+        console.log(user["first-name"]); // Output: Sagar
+        ```
+
+    -   4️⃣ Given a dynamic key let key = "age", how will you access the user[key]?
+
+    ```javascript
+    let key = "age";
+    const user = {
+        name: "Sagar",
+        age: 25,
+    };
+    ```
+
+    Code:
+
+    ```javascript
+    console.log(user[key]); // Output: 25
+    ```
+
+    -   5️⃣ From the object below, print the latitude:
+
+    ```javascript
+    const locations = {
+        city: "Kolkata",
+        coordinates: {
+            lat: 22.5726,
+            lon: 88.3639,
+        },
+    };
+    ```
+
+    Code:
+
+    ```javascript
+    console.log(locations.coordinates.lat); // Output: 22.5726
+    ```
+
+    -   6️⃣ What will happen if coordinates is missing? How can you prevent errors?
+
+    ```javascript
+    const locations = {
+        city: "Kolkata",
+        coordinates: {
+            lat: 22.5726,
+            lon: 88.3639,
+        },
+    };
+    ```
+
+    Code:
+
+    ```javascript
+    console.log(locations.coordinates?.lat); // Output: 22.5726
+    ```
+
+    -   7️⃣ Destructure the city and lat from the locations object:
+
+    ```javascript
+    const locations = {
+        city: "Kolkata",
+        coordinates: {
+            lat: 22.5726,
+            lon: 88.3639,
+        },
+    };
+    ```
+
+    Code:
+
+    ```javascript
+    const {
+        city,
+        coordinates: { lat },
+    } = locations;
+    console.log(city); // Output: Kolkata
+    console.log(lat); // Output: 22.5726
+    ```
+
+    -   8️⃣ Destructure the key "first-name" as a variable called firstName:
+
+    ```javascript
+    const user = {
+        "first-name": "Sagar",
+    };
+    ```
+
+    Code:
+
+    ```javascript
+    const { "first-name": firstName } = user;
+    console.log(firstName); // Output: Sagar
+    ```
+
+    -   9️⃣ Use `for-in` to log all keys in this object:
+
+    ```javascript
+    const course = {
+        title: "JavaScript Basics",
+        duration: "3 hours",
+        level: "Beginner",
+    };
+    ```
+
+    Code:
+
+    ```javascript
+    for (let key in course) {
+        console.log(key);
+    }
+    ```
+
+    -   🔟 Use `Object.entries()` to print all key-value pairs as:
+
+    ```javascript
+    const course = {
+        title: "JavaScript Basics",
+        duration: "3 hours",
+        level: "Beginner",
+    };
+    ```
+
+    Code:
+
+    ```javascript
+    Object.entries(course).forEach(([key, value]) => {
+        console.log(`${key}: ${value}`);
+    });
+    ```
+
+    OR
+
+    ```javascript
+    Object.entries(course).forEach((value) => {
+        console.log(`${value[0]}: ${value[1]}`);
+    });
+    ```
+
+    -   1️⃣1️⃣ Copy this object using spread operator:
+
+    ```javascript
+    const original = { a: 1, b: 2 };
+    ```
+
+    Code:
+
+    ```javascript
+    const copy = { ...original };
+    console.log(copy); // Output: { a: 1, b: 2 }
+    ```
+
+    -   1️⃣2️⃣ What is problem with this ?
+
+    ```javascript
+    const obj1 = { info: { score: 80 } };
+    const clone = { ...obj1 };
+    clone.info.score = 100;
+    console.log(obj1.info.score); // Output: ?
+    ```
+
+    **Answer**: The problem is that the spread operator creates a shallow copy of the object. Therefore, the nested object `info` is still referenced in both `obj1` and `clone`. Modifying `clone.info.score` also affects `obj1.info.score`, resulting in the output being `100`.
+
+    -   1️⃣3️⃣ Deep clone the obj1 safely.
+
+    ```javascript
+    const obj1 = { info: { score: 80 } };
+    ```
+
+    Code:
+
+    ```javascript
+    const deepClone = JSON.parse(JSON.stringify(obj1));
+    deepClone.info.score = 100;
+    console.log(obj1.info.score); // Output: 80
+    ``` 
+
+    -   Student manager app
+    -   Address book with optional chaining
+    -   Object flattener (stretch goal)
