@@ -1,3 +1,6 @@
 [submodule "DevOps/Git"]
 	path = DevOps/Git
 	url = https://github.com/Agent-006/mastering-git
+[submodule "DevOps/CI_CD"]
+	path = DevOps/CI_CD
+	url = https://github.com/Agent-006/DevOps_mastery
