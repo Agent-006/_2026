@@ -4,3 +4,6 @@
 [submodule "DevOps/CI_CD"]
 	path = DevOps/CI_CD
 	url = https://github.com/Agent-006/DevOps_mastery
+[submodule "DevOps/Docker"]
+	path = DevOps/Docker
+	url = https://github.com/Agent-006/docker_basic
